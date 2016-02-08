@@ -3,8 +3,7 @@
 
 function Spatula
 {
-    Write-Host -ForegroundColor Yellow "Spatula v.1.0.0"
-    $Setup = Read-Host 'First time setup?[$false]'
+    Write-Host -ForegroundColor Yellow "Spatula v.0.0.1"
     $HOSTNAME = Read-Host "Hostname"
     $ADDRESS = Read-Host "Node-IP"
     $DOMAIN = Read-Host "Domain"
@@ -21,8 +20,6 @@ function Spatula
         Remove-Item *$CookbookDownload*.tar*
         knife cookbook upload $CookbookDownload
     }#>
-   if($Setup -eq $true)
-   {
     if(Test-Path C:\Chef){}
     else
     {
@@ -55,12 +52,8 @@ function Spatula
      netsh advfirewall firewall set rule name="File and Printer Sharing (Echo Request - ICMPv4-In)" new enable=yes
 
      Test-NetConnection $HOSTNAME -Port 5986
-    }
-    else
-    {
+     knife[:winrm_ssl_verify_mode] = :verify_peer
         Set-Location -Path C:\Chef\
-        knife bootstrap windows winrm $ADDRESS --winrm-user $USER --winrm-password $PASSWORD --node-name $NODENAME --run-list "recipe[$COOKBOOKS]" --winrm-transport ssl --winrm-ssl-verify-mode verify_none
+        knife bootstrap windows winrm $ADDRESS --winrm-user $DOMANIN\$USER --winrm-password $PASSWORD --node-name $NODENAME --run-list "recipe[$COOKBOOKS]" --winrm-transport ssl --winrm-ssl-verify-mode verify_none
         knife node show $NODENAME
-    }
 }
-Spatula
