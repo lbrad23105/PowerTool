@@ -58,7 +58,8 @@ function Spatula
     }
     else
     {
-        knife bootstrap windows winrm $ADDRESS --winrm-user "$DOMAIN\$USER" --winrm-password $PASSWORD --node-name $NODENAME --run-list "recipe[$COOKBOOKS]" --winrm-transport ssl --winrm-ssl-verify-mode verify_none
+        Set-Location -Path C:\Chef\
+        knife bootstrap windows winrm $ADDRESS --winrm-user $USER --winrm-password $PASSWORD --node-name $NODENAME --run-list "recipe[$COOKBOOKS]" --winrm-transport ssl --winrm-ssl-verify-mode verify_none
         knife node show $NODENAME
     }
 }
