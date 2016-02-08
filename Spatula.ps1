@@ -12,7 +12,7 @@ function Spatula
     $PASSWORD = Read-Host "Password" -AsSecureString
     $NODENAME = Read-Host "Node-Name"
     [string[]]$COOKBOOKS = Read-Host "Cookbooks"
-    $IncludeCookbookDownload = Read-Host 'Would you like to download a cookbook(s)?[$false]'
+    <#$IncludeCookbookDownload = Read-Host 'Would you like to download a cookbook(s)?[$false]'
     if($IncludeCookbookDownload -eq $true)
     {
         [string[]]$CookbookDownload = Read-Host "Cookbooks to Download"
@@ -20,7 +20,7 @@ function Spatula
         tar -zxvf *$CookbookDownload*.tar* -C C:\Chef\cookbooks
         Remove-Item *$CookbookDownload*.tar*
         knife cookbook upload $CookbookDownload
-    }
+    }#>
    if($Setup -eq $true)
    {
     if(Test-Path C:\Chef){}
