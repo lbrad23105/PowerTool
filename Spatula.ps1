@@ -1,9 +1,6 @@
 # Spatula - A simple script for automating chef bootstrapping.
 # Luke Brady 2016
 
-# Spatula - A simple script for automating chef bootstrapping.
-# Luke Brady 2016
-
 function Spatula
 {
     Write-Host -ForegroundColor Yellow "Spatula v.1.0.0"
