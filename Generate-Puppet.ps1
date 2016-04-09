@@ -44,6 +44,9 @@ $keyWords = @(
     "yumrepo"
 )
 
+$variables = 
+'$variable = ""'
+
 $file = 
 "file { 'name':
     ensure => file,
@@ -137,6 +140,11 @@ function Build
 
     foreach($Snip in $Snippets)
     {
+        if($Snip -eq "variable" -or $Snip -eq "var")
+        {
+            Write-Output -InputObject $variables >> C:/Generate-Puppet/generatedCode.pp
+        }
+
         if($Snip -eq "file" -or $Snip -eq "File")
         {
             Write-Output -InputObject $file >> C:/Generate-Puppet/generatedCode.pp
