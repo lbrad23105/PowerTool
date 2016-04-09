@@ -115,6 +115,16 @@ $yumrepo =
     mirrorlist => ''
 }"
 
+$if = 
+"if test {
+    # enter puppet code
+}"
+
+$else = 
+"else {
+    # enter puppet code
+}"
+
 function Build
 {
     $pathTest = Test-Path -Path C:\Generate-Puppet
@@ -165,6 +175,16 @@ function Build
         if($Snip -eq "yumrepo" -or $Snip -eq "Yumrepo")
         {
             Write-Output -InputObject $yumrepo >> C:/Generate-Puppet/generatedCode.pp
+        }
+
+        if($Snip -eq "if" -or $Snip -eq "If")
+        {
+            Write-Output -InputObject $if >> C:/Generate-Puppet/generatedCode.pp
+        }
+
+        if($Snip -eq "else" -or $Snip -eq "Else")
+        {
+            Write-Output -InputObject $else >> C:/Generate-Puppet/generatedCode.pp
         }
     }       
 }
