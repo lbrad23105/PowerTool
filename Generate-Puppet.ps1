@@ -180,6 +180,11 @@ function Build
             Write-Output -InputObject $User >> C:/Generate-Puppet/generatedCode.pp
         }
 
+         if($Snip -eq "group" -or $Snip -eq "Group")
+        {
+            Write-Output -InputObject $group >> C:/Generate-Puppet/generatedCode.pp
+        }
+
         if($Snip -eq "yumrepo" -or $Snip -eq "Yumrepo")
         {
             Write-Output -InputObject $yumrepo >> C:/Generate-Puppet/generatedCode.pp
