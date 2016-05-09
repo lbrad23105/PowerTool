@@ -79,18 +79,16 @@ function Save-DriveState
 {
     $date = Get-Date
     $driveState = Get-PSDrive | Where-Object {$_.Free -gt 0}
+    $name = $driveState.Name
     $toGiga = $driveState.Free/1024/1024/1024
-    $write = "$date $toGiga"
+    $write = "$date $name $toGiga"
     New-Item -Path C:\indicium\logs\ -Name DriveState.txt -ItemType File -Force -Value $write
-    Get-Content C:\indicium\logs\
 }
 
 function Get-DriveState
 {
-    foreach($drive in $drives)
-    {
-        
-    } 
+    $statePath = "C:\indicium\logs\DriveState.txt"
+    Get-Content $statePath
 }
 
 function Invoke-LogWebPage
