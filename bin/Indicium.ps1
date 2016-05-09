@@ -25,10 +25,10 @@ function Filter-Logs
     $logs = Get-Item -Path $logDirectory\*
     if(Test-Path $logDirectory)
     {
-        $logCompilation = New-Item -Path "C:\logs.txt" -ItemType File -Force
+        $logCompilation = New-Item -Path "C:\indicium\logs\log.txt" -ItemType File -Force
         foreach($log in $logs)
         {
-            Write-Output "Compiling Log List..."
+            Write-Output "Compiling log list..."
             $logInformation = Get-WinEvent -Path $log
             $logInformation >> $logCompilation
             if($Error)
@@ -48,7 +48,7 @@ function Filter-Logs
 function Parse-Information
 {
     $information = 0
-    $log = "C:\Users\lbrad23105\Desktop\logs.txt"
+    $log = "C:\indicium\logs\log.txt"
     $informationParse = Select-String Information -Path $log
     foreach($info in $informationParse)
     {
@@ -60,7 +60,7 @@ function Parse-Information
 function Parse-Errors
 {
     $errors = 0
-    $log = "C:\logs.txt"
+    $log = "C:\indicium\logs\log.txt"
     $errorParse = Select-String Error -Path $log
     foreach($err in $errorParse)
     {
@@ -87,8 +87,6 @@ function Save-DriveState
 
 function Get-DriveState
 {
-    $date = Get-Date
-    $drives = Get-PSDrive | Where-Object {$_.Free -gt 0}
     foreach($drive in $drives)
     {
         
@@ -98,9 +96,9 @@ function Get-DriveState
 function Invoke-LogWebPage
 {
     
-    $sourceFile = "C:\logs.txt"
-    $targetFile = "C:\LogView.html"
-    Write-Output "Creating Web Page..."
+    $sourceFile = "C:\indicium\logs\log.txt"
+    $targetFile = "C:\indicium\logs\LogView.html"
+    Write-Output "Creating web page..."
     $file = Get-Content $sourceFile
     $fileLine = @()
     foreach ($line in $file) 
@@ -111,7 +109,7 @@ function Invoke-LogWebPage
     }
 
     $fileLine | ConvertTo-Html -title "Log View" -body "<H2>Log View</H2>" | Out-File $targetFile
-    Invoke-Item -Path C:\LogView.html
+    Invoke-Item -Path "C:\indicium\logs\LogView.html"
 }
 
 function Main
