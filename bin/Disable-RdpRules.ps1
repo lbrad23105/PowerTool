@@ -43,3 +43,16 @@ function Remove-UserPath {
 
 Disable-RdpRules
 Remove-UserPath -Names Eric,env
+
+$RemoteComputers = @("PC1","PC2")
+ForEach ($Computer in $RemoteComputers)
+{
+     Try
+         {
+             Invoke-Command -ComputerName $Computer -ScriptBlock {Get-ChildItem "C:\Program Files"} -ErrorAction Stop
+         }
+     Catch
+         {
+             Add-Content Unavailable-Computers.txt $Computer
+         }
+}
